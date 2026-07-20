@@ -22,3 +22,15 @@ function selectPlan(name, amount, profit) {
     localStorage.setItem("planAmount", amount);
     localStorage.setItem("dailyProfit", profit);
 }
+
+window.onload = function () {
+    const name = localStorage.getItem("planName");
+    const amount = localStorage.getItem("planAmount");
+    const profit = localStorage.getItem("dailyProfit");
+
+    if (document.getElementById("planName")) {
+        document.getElementById("planName").innerText = name || "No Plan";
+        document.getElementById("planAmount").innerText = amount || "$0";
+        document.getElementById("dailyProfit").innerText = profit || "$0.00";
+    }
+};
