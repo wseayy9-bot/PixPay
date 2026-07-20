@@ -17,3 +17,8 @@ function updateTimer(){
 
 setInterval(updateTimer,1000);
 updateTimer();
+function selectPlan(name, amount, profit) {
+    localStorage.setItem("planName", name);
+    localStorage.setItem("planAmount", amount);
+    localStorage.setItem("dailyProfit", profit);
+}
