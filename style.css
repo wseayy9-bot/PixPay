@@ -22,7 +22,7 @@ header h1{
     margin-bottom:20px;
 }
 
-.balance-card{
+
 .balance-card{
     background:linear-gradient(135deg,#6C3EF4,#8F5BFF);
     color:#fff;
@@ -131,31 +131,61 @@ body{
     gap:15px;
 }
 
+
+
 .plan-card{
     background:#fff;
-    border-radius:20px;
+    border-radius:18px;
     padding:18px;
+    margin-bottom:15px;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
-.plan-card h3{
+.plan-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.plan-header h3{
     color:#6C3EF4;
-    margin-bottom:10px;
+    font-size:22px;
 }
 
-.plan-card p{
-    margin:6px 0;
-    color:#666;
+.days{
+    background:#f3edff;
+    color:#6C3EF4;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
 }
 
-.plan-card button{
+.plan-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.plan-info small{
+    color:#777;
+    display:block;
+    margin-bottom:5px;
+}
+
+.plan-info h4{
+    color:#222;
+    font-size:18px;
+}
+
+.invest-btn{
     width:100%;
-    margin-top:12px;
+    border:none;
     background:#6C3EF4;
     color:#fff;
-    border:none;
-    padding:12px;
+    padding:14px;
     border-radius:12px;
     font-size:16px;
-    cursor:pointer;
+    font-weight:bold;
     }
