@@ -93,20 +93,18 @@ header h1{
 }
 
 .center-btn{
-    width:55px;
-    height:55px;
-    border-radius:50%;
+    width:60px;
+    height:60px;
     background:#6C3EF4;
     color:#fff !important;
+    border-radius:50%;
     display:flex !important;
     justify-content:center;
     align-items:center;
-    position:relative;
-    top:-18px;      
-    margin:0;       
-    font-size:24px;
-}
-
+    margin-top:-18px;
+    font-size:28px !important;
+    box-shadow:0 5px 15px rgba(108,62,244,.4);
+        }
 body{
     padding-bottom:90px;
 }
