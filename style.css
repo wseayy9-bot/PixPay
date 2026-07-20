@@ -23,21 +23,25 @@ header h1{
 }
 
 .balance-card{
-    background:#fff;
-    border-radius:20px;
-    padding:20px;
+.balance-card{
+    background:linear-gradient(135deg,#6C3EF4,#8F5BFF);
+    color:#fff;
+    border-radius:25px;
+    padding:25px;
     text-align:center;
+    box-shadow:0 10px 25px rgba(108,62,244,.3);
 }
 
 .balance-card p{
-    color:#666;
+    color:#eee;
     font-size:15px;
 }
 
 .balance-card h2{
-    color:#6C3EF4;
-    font-size:32px;
-    margin-top:10px;
+    color:#fff;
+    font-size:38px;
+    margin-top:8px;
+    font-weight:bold;
 }
 .quick-menu{
     display:grid;
