@@ -46,7 +46,25 @@ function selectPlan(name, amount, profit) {
 
     localStorage.setItem("plans", JSON.stringify(plans));
 }
+function getRemainingTime(startTime){
 
+    const end = startTime + (20*24*60*60*1000);
+
+    const now = Date.now();
+
+    const diff = end - now;
+
+    if(diff <= 0){
+        return "Finished";
+    }
+
+    const days = Math.floor(diff/(1000*60*60*24));
+    const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+    const seconds = Math.floor((diff%(1000*60))/1000);
+
+    return `${days}D ${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+}
 window.onload = function () {
 
     let plans = JSON.parse(localStorage.getItem("plans")) || [];
@@ -74,8 +92,7 @@ window.onload = function () {
                 </div>
             </div>
 
-            <p class="countdown">⏰ Remaining: <span class="timer">22:00:00</span></p>
-        </div>
+            <p class="countdown">⏰ Remaining: <span class="timer">${getRemainingTime(plan.time)}</span></p>
         `;
 
     });
@@ -85,3 +102,10 @@ window.onload = function () {
     }
 
 };
+setInterval(() => {
+
+    if(document.getElementById("myPlans")){
+        window.onload();
+    }
+
+},1000);
