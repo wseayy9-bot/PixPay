@@ -34,19 +34,54 @@ function updateTimer() {
 setInterval(updateTimer,1000);
 updateTimer();
 function selectPlan(name, amount, profit) {
-    localStorage.setItem("planName", name);
-    localStorage.setItem("planAmount", amount);
-    localStorage.setItem("dailyProfit", profit);
+
+    let plans = JSON.parse(localStorage.getItem("plans")) || [];
+
+    plans.push({
+        name: name,
+        amount: amount,
+        profit: profit,
+        time: Date.now()
+    });
+
+    localStorage.setItem("plans", JSON.stringify(plans));
 }
 
 window.onload = function () {
-    const name = localStorage.getItem("planName");
-    const amount = localStorage.getItem("planAmount");
-    const profit = localStorage.getItem("dailyProfit");
 
-    if (document.getElementById("planName")) {
-        document.getElementById("planName").innerText = name || "No Plan";
-        document.getElementById("planAmount").innerText = amount || "$0";
-        document.getElementById("dailyProfit").innerText = profit || "$0.00";
+    let plans = JSON.parse(localStorage.getItem("plans")) || [];
+
+    let html = "";
+
+    plans.forEach(plan => {
+
+        html += `
+        <div class="plan-card">
+            <div class="plan-header">
+                <h3>${plan.name}</h3>
+                <span class="days">20 Days</span>
+            </div>
+
+            <div class="plan-info">
+                <div>
+                    <small>Investment</small>
+                    <h4>${plan.amount}</h4>
+                </div>
+
+                <div>
+                    <small>Daily Profit</small>
+                    <h4>${plan.profit}</h4>
+                </div>
+            </div>
+
+            <p class="countdown">⏰ Remaining: <span class="timer">22:00:00</span></p>
+        </div>
+        `;
+
+    });
+
+    if(document.getElementById("myPlans")){
+        document.getElementById("myPlans").innerHTML = html;
     }
+
 };
