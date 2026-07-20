@@ -116,3 +116,46 @@ header h1{
 body{
     padding-bottom:90px;
 }
+.section-title{
+    padding:0 20px;
+    margin:15px 0;
+    color:#6C3EF4;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.plan-list{
+    padding:0 20px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.plan-card{
+    background:#fff;
+    border-radius:20px;
+    padding:18px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.plan-card h3{
+    color:#6C3EF4;
+    margin-bottom:10px;
+}
+
+.plan-card p{
+    margin:6px 0;
+    color:#666;
+}
+
+.plan-card button{
+    width:100%;
+    margin-top:12px;
+    background:#6C3EF4;
+    color:#fff;
+    border:none;
+    padding:12px;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+    }
