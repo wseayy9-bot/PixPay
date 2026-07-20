@@ -94,8 +94,8 @@ header h1{
 }
 
 .center-btn{
-    width:55px;
-    height:55px;
+    width:65px;
+    height:65px;
     background:#6C3EF4;
     color:#fff !important;
     border-radius:50%;
@@ -103,11 +103,12 @@ header h1{
     justify-content:center;
     align-items:center;
     text-decoration:none;
-    font-size:28px;
+    font-size:32px;
     margin:auto;
-    transform:translateY(-18px);
+    transform:translateY(-22px);
     flex-direction:row !important;
-    }
+    box-shadow:0 6px 18px rgba(108,62,244,.35);
+}
 body{
     padding-bottom:90px;
 }
