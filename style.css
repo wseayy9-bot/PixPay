@@ -1,1 +1,41 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
+body{
+    background:#f5f7ff;
+}
+
+header{
+    background:linear-gradient(135deg,#6C3EF4,#8F5BFF);
+    padding:20px;
+    border-radius:0 0 30px 30px;
+}
+
+header h1{
+    color:#fff;
+    text-align:center;
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.balance-card{
+    background:#fff;
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+}
+
+.balance-card p{
+    color:#666;
+    font-size:15px;
+}
+
+.balance-card h2{
+    color:#6C3EF4;
+    font-size:32px;
+    margin-top:10px;
+}
