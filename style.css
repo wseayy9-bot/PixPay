@@ -189,3 +189,15 @@ body{
     font-size:16px;
     font-weight:bold;
     }
+.countdown{
+    text-align:center;
+    color:#ff5722;
+    font-weight:bold;
+    margin:12px 0;
+    font-size:15px;
+}
+
+#timer{
+    color:#6C3EF4;
+    font-size:18px;
+}
