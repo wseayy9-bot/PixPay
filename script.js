@@ -93,7 +93,9 @@ window.onload = function () {
             </div>
 
             <p class="countdown">⏰ Remaining: <span class="timer">${getRemainingTime(plan.time)}</span></p>
+         </div>
         `;
+        
 
     });
 
