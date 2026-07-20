@@ -39,3 +39,28 @@ header h1{
     font-size:32px;
     margin-top:10px;
 }
+.quick-menu{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    padding:20px;
+}
+
+.menu-card{
+    background:#fff;
+    border-radius:18px;
+    height:90px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    font-size:28px;
+    color:#6C3EF4;
+}
+
+.menu-card span{
+    margin-top:8px;
+    font-size:14px;
+    font-weight:600;
+}
