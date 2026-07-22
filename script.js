@@ -38,11 +38,13 @@ function selectPlan(name, amount, profit) {
     let plans = JSON.parse(localStorage.getItem("plans")) || [];
 
     plans.push({
-        name: name,
-        amount: amount,
-        profit: profit,
-        time: Date.now()
-    });
+    name: name,
+    amount: amount,
+    profit: profit,
+    startTime: Date.now(),
+    endTime: Date.now() + (20 * 24 * 60 * 60 * 1000),
+    status: "active"
+});
 
     localStorage.setItem("plans", JSON.stringify(plans));
 }
@@ -70,8 +72,14 @@ window.onload = function () {
     let plans = JSON.parse(localStorage.getItem("plans")) || [];
 
     let html = "";
+  plans.forEach(plan => {
+    if (Date.now() >= plan.endTime) {
+        plan.status = "completed";
+    }
+});
 
-    plans.forEach(plan => {
+localStorage.setItem("plans", JSON.stringify(plans));
+    plans.filter(plan => plan.status === "active").forEach(plan => {
 
         html += `
         <div class="plan-card">
@@ -92,7 +100,7 @@ window.onload = function () {
                 </div>
             </div>
 
-            <p class="countdown">⏰ Remaining: <span class="timer">${getRemainingTime(plan.time)}</span></p>
+            <p class="countdown">⏰ Remaining:<span class="timer">${getRemainingTime(plan.startTime)}</span>
          </div>
         `;
         
