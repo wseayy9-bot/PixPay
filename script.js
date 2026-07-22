@@ -1,11 +1,14 @@
+// ===============================
+// Save Plan
+// ===============================
 function selectPlan(name, amount, profit) {
 
     let plans = JSON.parse(localStorage.getItem("plans")) || [];
 
     plans.push({
         name: name,
-        amount: parseFloat(amount.replace("$","")),
-        profit: parseFloat(profit.replace("$","")),
+        amount: parseFloat(amount.replace("$", "")),
+        profit: parseFloat(profit.replace("$", "")),
         startTime: Date.now(),
         nextReward: Date.now() + (22 * 60 * 60 * 1000),
         received: 0,
@@ -15,64 +18,65 @@ function selectPlan(name, amount, profit) {
     localStorage.setItem("plans", JSON.stringify(plans));
 }
 
-function getRemainingTime(startTime){
+// ===============================
+// Countdown
+// ===============================
+function getRemainingTime(startTime) {
 
     const end = startTime + (20 * 24 * 60 * 60 * 1000);
     const diff = end - Date.now();
 
-    if(diff <= 0){
-        return "Finished";
-    }
+    if (diff <= 0) return "Completed";
 
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
-    const seconds = Math.floor((diff % (1000*60)) / 1000);
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
 
     return `${days}D ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
 }
 
-window.onload = function(){
+// ===============================
+// Load Plans
+// ===============================
+function loadPlans(){
 
     let plans = JSON.parse(localStorage.getItem("plans")) || [];
     let balance = Number(localStorage.getItem("balance")) || 0;
 
-    plans.forEach(plan=>{
+    // Reward every 22 hours
+    plans.forEach(plan => {
 
-        if(plan.status=="active"){
+        if(plan.status !== "active") return;
 
-            while(Date.now() >= plan.nextReward && plan.received < 20){
+        while(Date.now() >= plan.nextReward && plan.received < 20){
 
-                balance += plan.profit;
+            balance += plan.profit;
 
-                plan.received++;
-                plan.nextReward += 22 * 60 * 60 * 1000;
+            plan.received++;
+            plan.nextReward += 22 * 60 * 60 * 1000;
 
-            }
+        }
 
-            if(plan.received >= 20){
-                plan.status="completed";
-            }
-
+        if(plan.received >= 20){
+            plan.status = "completed";
         }
 
     });
 
-    localStorage.setItem("balance",balance.toFixed(2));
-    localStorage.setItem("plans",JSON.stringify(plans));
+    localStorage.setItem("balance", balance.toFixed(2));
+    localStorage.setItem("plans", JSON.stringify(plans));
 
-    let page = window.location.pathname;
-    let showPlans=[];
+    // Active / Completed Page
+    const page = window.location.pathname;
 
-    if(page.includes("completed.html")){
-        showPlans = plans.filter(p=>p.status=="completed");
-    }else{
-        showPlans = plans.filter(p=>p.status=="active");
-    }
+    let list = page.includes("completed.html")
+        ? plans.filter(p => p.status === "completed")
+        : plans.filter(p => p.status === "active");
 
-    let html="";
+    let html = "";
 
-    showPlans.forEach(plan=>{
+    list.forEach(plan => {
 
         html += `
         <div class="plan-card">
@@ -102,13 +106,10 @@ window.onload = function(){
             </div>
 
             <p class="countdown">
-                ⏰ Remaining:
-                <span>${getRemainingTime(plan.startTime)}</span>
+                ⏰ ${getRemainingTime(plan.startTime)}
             </p>
 
-        </div>
-        `;
-
+        </div>`;
     });
 
     if(document.getElementById("myPlans")){
@@ -117,9 +118,12 @@ window.onload = function(){
 
     if(document.getElementById("balance")){
         document.getElementById("balance").innerHTML =
-        "$"+(localStorage.getItem("balance") || "0.00");
+            "$" + (localStorage.getItem("balance") || "0.00");
     }
-
 }
 
-setInterval(window.onload,1000);
+// ===============================
+// Auto Refresh
+// ===============================
+loadPlans();
+setInterval(loadPlans,1000);
