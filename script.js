@@ -120,3 +120,11 @@ if(document.getElementById("balance")){
     document.getElementById("balance").innerHTML =
     "$" + (localStorage.getItem("balance") || "0.00");
         }
+setInterval(() => {
+
+    if(document.getElementById("balance")){
+        document.getElementById("balance").innerHTML =
+        "$" + (localStorage.getItem("balance") || "0.00");
+    }
+
+},1000);
