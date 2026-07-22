@@ -39,9 +39,6 @@ window.onload = function () {
     let plans = JSON.parse(localStorage.getItem("plans")) || [];
     let balance = Number(localStorage.getItem("balance")) || 0;
 
-plans.forEach(plan => {
-
-    if(plan.status=="active" && Date.now() >= plan.nextReward){
 
         balance += plan.profit;
         localStorage.setItem("balance", balance.toFixed(2));
@@ -50,11 +47,7 @@ plans.forEach(plan => {
         plan.nextReward += 22 * 60 * 60 * 1000;
 
         if(plan.received >= 20){
-            plan.status = "completed";
-        }
-    }
-
-});
+            
 
 localStorage.setItem("plans", JSON.stringify(plans));
     let html = "";
