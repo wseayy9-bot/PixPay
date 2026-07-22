@@ -5,10 +5,11 @@ function selectPlan(name, amount, profit) {
 
     plans.push({
     name: name,
-    amount: amount,
-    profit: profit,
+    amount: parseFloat(amount.replace("$","")),
+    profit: parseFloat(profit.replace("$","")),
     startTime: Date.now(),
-    endTime: Date.now() + (20 * 24 * 60 * 60 * 1000),
+    nextReward: Date.now() + (22 * 60 * 60 * 1000),
+    received: 0,
     status: "active"
 });
 
@@ -36,7 +37,26 @@ function getRemainingTime(startTime){
 window.onload = function () {
 
     let plans = JSON.parse(localStorage.getItem("plans")) || [];
+    let balance = Number(localStorage.getItem("balance")) || 0;
 
+plans.forEach(plan => {
+
+    if(plan.status=="active" && Date.now() >= plan.nextReward){
+
+        balance += plan.profit;
+        localStorage.setItem("balance", balance.toFixed(2));
+
+        plan.received++;
+        plan.nextReward += 22 * 60 * 60 * 1000;
+
+        if(plan.received >= 20){
+            plan.status = "completed";
+        }
+    }
+
+});
+
+localStorage.setItem("plans", JSON.stringify(plans));
     let html = "";
   plans.forEach(plan => {
     if (Date.now() >= plan.endTime) {
@@ -96,3 +116,7 @@ setInterval(() => {
     }
 
 },1000);
+if(document.getElementById("balance")){
+    document.getElementById("balance").innerHTML =
+    "$" + (localStorage.getItem("balance") || "0.00");
+        }
