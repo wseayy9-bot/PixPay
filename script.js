@@ -35,10 +35,12 @@ function getRemainingTime(startTime){
     return `${days}D ${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
 }
 window.onload = function () {
+let plans = JSON.parse(localStorage.getItem("plans")) || [];
+let balance = Number(localStorage.getItem("balance")) || 0;
 
-    let plans = JSON.parse(localStorage.getItem("plans")) || [];
-    let balance = Number(localStorage.getItem("balance")) || 0;
+plans.forEach(plan => {
 
+    if(plan.status == "active" && Date.now() >= plan.nextReward){
 
         balance += plan.profit;
         localStorage.setItem("balance", balance.toFixed(2));
@@ -47,7 +49,13 @@ window.onload = function () {
         plan.nextReward += 22 * 60 * 60 * 1000;
 
         if(plan.received >= 20){
-            
+            plan.status = "completed";
+        }
+
+    }
+
+});
+    
 
 localStorage.setItem("plans", JSON.stringify(plans));
     let html = "";
