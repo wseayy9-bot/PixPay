@@ -45,7 +45,17 @@ window.onload = function () {
 });
 
 localStorage.setItem("plans", JSON.stringify(plans));
-    plans.filter(plan => plan.status === "active").forEach(plan => {
+    const page = window.location.pathname;
+
+let showPlans = [];
+
+if (page.includes("completed.html")) {
+    showPlans = plans.filter(plan => plan.status === "completed");
+} else {
+    showPlans = plans.filter(plan => plan.status === "active");
+}
+
+showPlans.forEach(plan => {
 
         html += `
         <div class="plan-card">
