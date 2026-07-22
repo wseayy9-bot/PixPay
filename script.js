@@ -51,11 +51,7 @@ window.onload = function () {
 
 localStorage.setItem("plans", JSON.stringify(plans));
     let html = "";
-  plans.forEach(plan => {
-    if (Date.now() >= plan.endTime) {
-        plan.status = "completed";
-    }
-});
+  
 
 localStorage.setItem("plans", JSON.stringify(plans));
     const page = window.location.pathname;
